@@ -48,14 +48,22 @@ class Hero:
             total_amnt_attack += new_attack.attack()
         return total_amnt_attack
 
+class Weapon(Ability):
+    def attack(self):
+        """
+        This method should should return a random value
+        between 0 and the full attack power of the weapon.
+        Hint: The attack power is inherited.
+        """
+
 
 if __name__ == "__main__":
     # If you run this file from the terminal this block is executed.
-    hero = Hero("Wonder Woman")
-    print(hero.attack())
-    ability = Ability("Divine Speed", 300)
-    hero.add_ability(ability)
-    print(hero.attack())
-    new_ability = Ability("Super Human Strength", 800)
-    hero.add_ability(new_ability)
-    print(hero.attack())
+    # hero = Hero("Wonder Woman")
+    # print(hero.attack())
+    # ability = Ability("Divine Speed", 300)
+    # hero.add_ability(ability)
+    # print(hero.attack())
+    # new_ability = Ability("Super Human Strength", 800)
+    # hero.add_ability(new_ability)
+    # print(hero.attack())
