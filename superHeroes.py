@@ -78,7 +78,6 @@ class Team:
                     self.heroes.remove(hero)
                 else:
                     return 0
-            return 0
         return 0
 
 
@@ -89,17 +88,9 @@ class Team:
         If Hero isn't found return 0.
         """
 
+
     def view_all_heroes(self):
         """Print out all heroes to the console."""
 
 
 if __name__ == "__main__":
-    # If you run this file from the terminal this block is executed.
-    # hero = Hero("Wonder Woman")
-    # print(hero.attack())
-    # ability = Ability("Divine Speed", 300)
-    # hero.add_ability(ability)
-    # print(hero.attack())
-    # new_ability = Ability("Super Human Strength", 800)
-    # hero.add_ability(new_ability)
-    # print(hero.attack())
