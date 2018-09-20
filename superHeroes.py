@@ -55,6 +55,32 @@ class Weapon(Ability):
         between 0 and the full attack power of the weapon.
         Hint: The attack power is inherited.
         """
+        return randint(0, self.attack_strength)
+
+class Team:
+    def init(self, team_name):
+        """Instantiate resources."""
+        self.name = team_name
+        self.heroes = list()
+
+    def add_hero(self, Hero):
+        """Add Hero object to heroes list."""
+        self.heroes.append(Hero)
+
+    def remove_hero(self, name):
+        """
+        Remove hero from heroes list.
+        If Hero isn't found return 0.
+        """
+
+    def find_hero(self, name):
+        """
+        Find and return hero from heroes list.
+        If Hero isn't found return 0.
+        """
+
+    def view_all_heroes(self):
+        """Print out all heroes to the console."""
 
 
 if __name__ == "__main__":
