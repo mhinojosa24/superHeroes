@@ -58,7 +58,7 @@ class Weapon(Ability):
         return randint(0, self.attack_strength)
 
 class Team:
-    def init(self, team_name):
+    def __init__(self, team_name):
         """Instantiate resources."""
         self.name = team_name
         self.heroes = list()
@@ -72,6 +72,16 @@ class Team:
         Remove hero from heroes list.
         If Hero isn't found return 0.
         """
+        if self.heroes != []:
+            for hero in self.heroes:
+                if name in hero.name:
+                    self.heroes.remove(hero)
+                else:
+                    return 0
+            return 0
+        return 0
+
+
 
     def find_hero(self, name):
         """
