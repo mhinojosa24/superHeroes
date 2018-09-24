@@ -51,11 +51,11 @@ class Hero:
 class Weapon(Ability):
     def attack(self):
         """
-        This method should should return a random value
+        This method should return a random value
         between 0 and the full attack power of the weapon.
         Hint: The attack power is inherited.
         """
-        return randint(0, self.attack_strength)
+        return random.randint(0, self.attack_strength)
 
 class Team:
     def __init__(self, team_name):
@@ -80,17 +80,21 @@ class Team:
                     return 0
         return 0
 
-
-
     def find_hero(self, name):
         """
         Find and return hero from heroes list.
         If Hero isn't found return 0.
         """
+        for i in self.heroes:
+            if i.name == name:
+                return i
+        return 0
+
 
 
     def view_all_heroes(self):
         """Print out all heroes to the console."""
+        for hero in self.heroes:
+            print(hero.name)
 
-
-if __name__ == "__main__":
+# if __name__ == "__main__":
