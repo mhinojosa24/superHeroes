@@ -97,4 +97,113 @@ class Team:
         for hero in self.heroes:
             print(hero.name)
 
+
+class Armor:
+    def __init__(self, name, defense):
+        """Instantiate name and defense strength."""
+        self.name = name
+        self.defense = defense
+
+    def defend(self):
+        """
+        Return a random value between 0 and the
+        initialized defend strength.
+        """
+
+        return range(0, len(self.defense))
+
+
+
+class Hero:
+    def __init__(self, name, health=100)
+        # This should be the code you already have written.
+        # ...
+
+        self.armors = list()
+        self.start_health = health
+        self.health = health
+        self.deaths = 0
+        self.kills = 0
+
+    def defend(self):
+        """
+        This method should run the defend method on
+        each piece of armor and calculate the total defense.
+
+        If the hero's health is 0, the hero is out of play and
+        should return 0 defense points.
+        """
+        #run method on each armor in the list 
+        #call defend method on each armor
+        #calculate total defense
+        #if statment, return defense points
+        for amors in self.armors:
+            total_defense += armors.defend
+            if self.start_health == 0:
+                return 0
+
+    def take_damage(self, damage_amt):
+        """
+        This method should subtract the damage amount from the
+        hero's health.
+
+        If the hero dies update number of deaths.
+        """
+        #subtract damage amount from hero start_health
+        #hero dies, upate damge amount
+
+        deaths = damage_amt
+
+    def add_kill(self, num_kills):
+        """
+        This method should add the number of kills to self.kills
+        """
+
+
+class Team:
+    # Keep all your current code, but add these methods
+    def attack(self, other_team):
+        """
+        This method should total our teams attack
+        strength and call the defend() method on
+        the rival team that is passed in.
+
+        It should call add_kill() on each hero with
+        the number of kills made.
+        """
+
+    def defend(self, damage_amt):
+        """
+        This method should calculate our team's total defense.
+        Any damage in excess of our team's total defense should
+        be evenly distributed amongst all heroes with the
+        deal_damage() method.
+
+        Return number of heroes killed in attack.
+        """
+
+    def deal_damage(self, damage):
+        """
+        Divide the total damage amongst all heroes.
+        Return the number of heros that died in attack.
+        """
+
+    def revive_heroes(self, health=100):
+        """
+        This method should reset all heroes health to their
+        original starting value.
+        """
+
+    def stats(self):
+        """
+        This method should print the ratio of kills/deaths for
+        each member of the team to the screen.
+
+        This data must be output to the terminal.
+        """
+
+    def update_kills(self):
+        """
+        This method should update each hero when there is a team kill.
+        """
 # if __name__ == "__main__":
