@@ -28,11 +28,17 @@ class Ability:
         attack_value = attack_strength
 
 class Hero:
-    def __init__(self, name):
+    def __init__(self, name, health=100):
         # ✔️ Initialize starting values
         # ✔️ created a list to store the superheroes abilities
         self.abilities = list()
         self.name = name
+        self.armors = list()
+        self.start_health = health
+        self.health = health
+        self.deaths = 0
+        self.kills = 0
+
 
 
     def add_ability(self, ability):
@@ -48,6 +54,46 @@ class Hero:
             total_amnt_attack += new_attack.attack()
         return total_amnt_attack
 
+    def defend(self):
+        """
+        This method should run the defend method on
+        each piece of armor and calculate the total defense.
+
+        If the hero's health is 0, the hero is out of play and
+        should return 0 defense points.
+        """
+        #run method on each armor in the list
+        #call defend method on each armor
+        #calculate total defense
+        #if statment, return defense points
+        total_defense = 0
+        for amor in self.armors:
+            total_defense += armor.defend()
+            return total_defense
+            if self.health == 0:
+                return 0
+
+    def take_damage(self, damage_amt):
+        """
+        This method should subtract the damage amount from the
+        hero's health.
+
+        If the hero dies update number of deaths.
+        """
+
+        for hero in self.heroes:
+            damage_amt -= self.health
+            if hero.health == 0
+                return self.deaths += 1
+
+
+
+    def add_kill(self, num_kills):
+        """
+        This method should add the number of kills to self.kills
+        """
+        self.kills += num_kills
+
 class Weapon(Ability):
     def attack(self):
         """
@@ -56,6 +102,9 @@ class Weapon(Ability):
         Hint: The attack power is inherited.
         """
         return random.randint(0, self.attack_strength)
+
+
+
 
 class Team:
     def __init__(self, team_name):
@@ -85,9 +134,9 @@ class Team:
         Find and return hero from heroes list.
         If Hero isn't found return 0.
         """
-        for i in self.heroes:
-            if i.name == name:
-                return i
+        for hero in self.heroes:
+            if hero.name == name:
+                return hero
         return 0
 
 
@@ -97,71 +146,6 @@ class Team:
         for hero in self.heroes:
             print(hero.name)
 
-
-class Armor:
-    def __init__(self, name, defense):
-        """Instantiate name and defense strength."""
-        self.name = name
-        self.defense = defense
-
-    def defend(self):
-        """
-        Return a random value between 0 and the
-        initialized defend strength.
-        """
-
-        return range(0, len(self.defense))
-
-
-
-class Hero:
-    def __init__(self, name, health=100)
-        # This should be the code you already have written.
-        # ...
-
-        self.armors = list()
-        self.start_health = health
-        self.health = health
-        self.deaths = 0
-        self.kills = 0
-
-    def defend(self):
-        """
-        This method should run the defend method on
-        each piece of armor and calculate the total defense.
-
-        If the hero's health is 0, the hero is out of play and
-        should return 0 defense points.
-        """
-        #run method on each armor in the list 
-        #call defend method on each armor
-        #calculate total defense
-        #if statment, return defense points
-        for amors in self.armors:
-            total_defense += armors.defend
-            if self.start_health == 0:
-                return 0
-
-    def take_damage(self, damage_amt):
-        """
-        This method should subtract the damage amount from the
-        hero's health.
-
-        If the hero dies update number of deaths.
-        """
-        #subtract damage amount from hero start_health
-        #hero dies, upate damge amount
-
-        deaths = damage_amt
-
-    def add_kill(self, num_kills):
-        """
-        This method should add the number of kills to self.kills
-        """
-
-
-class Team:
-    # Keep all your current code, but add these methods
     def attack(self, other_team):
         """
         This method should total our teams attack
@@ -171,22 +155,46 @@ class Team:
         It should call add_kill() on each hero with
         the number of kills made.
         """
+        total_team_attk = 0
+        for hero in self.heroes:
+            total_team_attk += hero.attack()
+        deaths = other_team.defend(total_amnt_attack)
 
-    def defend(self, damage_amt):
+        for hero in self.heroes:
+            add_kills(deaths)
+
+    defend(self, damage_amt):
         """
         This method should calculate our team's total defense.
+
         Any damage in excess of our team's total defense should
+
         be evenly distributed amongst all heroes with the
+
         deal_damage() method.
 
         Return number of heroes killed in attack.
         """
+
+        teams_total_defense = 0
+        for hero in self.heroes:
+            teams_total_defense += hero.defend()
+        excess_total = damage_amnt - teams_total_defense
+
+        if excess_total > 0:
+            return self.deal_damage(excess_total)
+        else:
+            return 0
+
 
     def deal_damage(self, damage):
         """
         Divide the total damage amongst all heroes.
         Return the number of heros that died in attack.
         """
+        total_damage_amount = damage // len(self.heroes)
+
+
 
     def revive_heroes(self, health=100):
         """
@@ -206,4 +214,20 @@ class Team:
         """
         This method should update each hero when there is a team kill.
         """
+
+class Armor:
+    def __init__(self, name, defense):
+        """Instantiate name and defense strength."""
+        self.name = name
+        self.defense = defense
+
+    def defend(self):
+        """
+        Return a random value between 0 and the
+        initialized defend strength.
+        """
+
+        return range(0, len(self.defense))
+
+
 # if __name__ == "__main__":
