@@ -251,9 +251,42 @@ class Team:
             print("{} has {} kills and {} deaths.".format(hero.name, hero.kills, hero.deaths))
 
 
-    def update_kills(self):
+class Arena:
+    def __init__(self):
         """
-        This method should update each hero when there is a team kill.
+        Declare variables
+        """
+        self.team_one = team_1
+        self.team_two = team_2
+
+    def usr_input(self, prompt):
+        user_input = input(prompt)
+        return user_input
+
+    def build_team_one(self):
+        """
+        This method should allow a user to build team one.
+        """
+        #name of team
+        #name of heros
+        #
+        team_1 =
+
+    def build_team_two(self):
+        """
+        This method should allow user to build team two.
+        """
+
+    def team_battle(self):
+        """
+        This method should continue to battle teams until
+        one or both teams are dead.
+        """
+
+    def show_stats(self):
+        """
+        This method should print out the battle statistics
+        including each heroes kill/death ratio.
         """
 
 
