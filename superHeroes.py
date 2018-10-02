@@ -15,6 +15,10 @@ class Hero:
         self.deaths = 0
         self.kills = 0
 
+
+    def add_armor(self, type_armor):
+        self.armors.append(type_armor)
+
     def add_ability(self, ability):
         """
         Add ability to abilities list
@@ -48,7 +52,7 @@ class Hero:
 
         total_armor_defense = 0
         if len(self.armors) > 0 and self.health > 0:
-            for amor in self.armors:
+            for armor in self.armors:
                 total_armor_defense += armor.defend()
         return total_armor_defense
 
@@ -60,16 +64,17 @@ class Hero:
         If the hero dies update number of deaths.
         """
 
-        for hero in self.heroes:
-            hero.health -= damage_amnt
-            if hero.health <= 0:
-                hero.deaths += 1
+        self.health -= damage_amt
+        if self.health <= 0:
+            self.deaths += 1
 
 
-    def add_kill(self, num_kills):
+
+    def add_kills(self, num_kills):
         """
         This method should add the number of kills to self.kills
         """
+
         self.kills += num_kills
 
 
@@ -79,13 +84,13 @@ class Armor:
         self.name = name
         self.defense = defense
 
-        def defend(self):
-            """
-            Return a random value between 0 and the
-            initialized defend strength.
-            """
+    def defend(self):
+        """
+        Return a random value between 0 and the
+        initialized defend strength.
+        """
 
-            return range(0, len(self.defense))
+        return random.randint(0, int(self.defense))
 
 
 class Ability:
@@ -178,12 +183,15 @@ class Team:
         the number of kills made.
         """
         total_team_attk = 0
+        total_kills = 0
         for hero in self.heroes:
             total_team_attk += hero.attack()
-        deaths = other_team.defend(total_amnt_attack)
+        other_team.defend(total_team_attk)
 
-        for hero in self.heroes:
-            add_kills(deaths)
+        for h in range(len(other_team.heroes)):
+            if other_team.heroes[h].health <= 0:
+                total_kills += 1
+                self.heroes[h].add_kills(total_kills)
 
     def defend(self, damage_amt):
         """
@@ -193,16 +201,17 @@ class Team:
         deal_damage() method.
         Return number of heroes killed in attack.
         """
-
+        total_kills = 0
         teams_total_defense = 0
         for hero in self.heroes:
             teams_total_defense += hero.defend()
-        excess_total = damage_amnt - teams_total_defense
+        excess_total = damage_amt - teams_total_defense
+        self.deal_damage(excess_total)
 
-        if excess_total > 0:
-            return self.deal_damage(excess_total)
-        else:
-            return 0
+        for hero in self.heroes:
+            if hero.health <= 0:
+                total_kills += 1
+        return total_kills
 
 
     def deal_damage(self, damage):
@@ -227,8 +236,8 @@ class Team:
         This method should reset all heroes health to their
         original starting value.
         """
-        for hero in self.heroes:
-            hero.health == self.start_health
+        for hero in range(len(self.heroes)):
+            self.heroes[hero].health = self.heroes[hero].start_health
 
     def stats(self):
         """
@@ -237,8 +246,6 @@ class Team:
 
         This data must be output to the terminal.
         """
-        #print ratio of kills/ deaths
-        #iterate through list of heroes
 
         for hero in self.heroes:
             print("{} has {} kills and {} deaths.".format(hero.name, hero.kills, hero.deaths))
