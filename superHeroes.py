@@ -268,26 +268,103 @@ class Arena:
         This method should allow a user to build team one.
         """
         #name of team
-        #name of heros
-        #
-        team_1 =
+        #name of heroes
+        #name of ability
+        print("Lets create your team!")
+        self.team_one = Team(self.usr_input("Give your team a name! "))
+        hero_name = self.hero_name
+        ability_name = self.usr_input("What ability does {} have? ".format(hero_name))
+        ability_lvl = int(self.usr_input("What's the ability? "))
+        ability = Ability(ability_name, ability_lvl)
+        hero_name.add_ability(ability)
+        weapon = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
+        hero_name.add_ability(weapon)
+        self.team_one.add_hero(hero_name)
+
+        hero_name2 = self.hero_name
+        ability_name2 = self.usr_input("What ability does {} have? ".format(hero_name2))
+        ability_lvl2 = int(self.usr_input("What's the ability? "))
+        ability2 = Ability(ability_name, ability_lvl)
+        hero_name2.add_ability(ability2)
+        weapon2 = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
+        hero_name2.add_ability(weapon2)
+        self.team_one.add_hero(hero_name2)
 
     def build_team_two(self):
         """
         This method should allow user to build team two.
         """
+        print("Create your secon team!\n")
+        hero_name = self.hero_name
+        self.team_two = Team(self.usr_input("Give your team a name! "))
+        ability_name = self.usr_input("What ability does {} have? ".format(hero_name))
+        ability_lvl = int(self.usr_input("What's the ability power? "))
+        ability = Ability(ability_name, ability_lvl)
+        hero_name.add_ability(ability)
+        weapon = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
+        hero_name.add_ability(weapon)
+        self.team_two.add_hero(hero_name)
+
+        hero_name2 = self.hero_name
+        ability_name2 = self.usr_input("What ability does {} have? ".format(hero_name2))
+        ability_lvl2 = int(self.usr_input("What's the ability? "))
+        ability2 = Ability(ability_name, ability_lvl)
+        hero_name2.add_ability(ability2)
+        weapon2 = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
+        hero_name2.add_ability(weapon2)
+        self.team_one.add_hero(hero_name2)
+
+
 
     def team_battle(self):
         """
         This method should continue to battle teams until
         one or both teams are dead.
         """
+        deaths1 = 0
+        deaths2 = 0
 
-    def show_stats(self):
+        while deaths < len(self.team_one.heroes) and deaths2 < len(self.team2.heroes):
+            self.team_one.attack(self.team_two)
+            self.team_two.attack(self.team_one)
+
+            for i in self.team_one.heroes:
+                deaths1 += i.deaths
+
+            for i in self.team_two.heoes:
+                deaths2 += i.deaths
+
+
+    def show_stats(arena):
         """
         This method should print out the battle statistics
         including each heroes kill/death ratio.
         """
+        print(self.team_one.name + " stats: ")
+        self.team_one.stats()
+        print(self.team_two.name + " stats: ")
+        self.team_one.stats()
+
+    def play_again(self):
+        play_again = self.usr_input("Play Again? Y or N: ")
+        if play_again == "y" || play_again == "Y":
+            self.team_one.revive_heroes()
+            self.team_two.revive_heroes()
+            game_loop(self)
 
 
-# if __name__ == "__main__":
+arena = Arena()
+arena.build_team_one()
+arena.build_team_two()
+
+
+
+def game_loop(arena):
+    arena.team_battle()
+    arena.team_battle()
+    arena.play_again()
+
+game_loop(arena)
+
+
+if __name__ == "__main__":
