@@ -1,5 +1,5 @@
 import random
-
+import sys
 
 class Hero:
     def __init__(self, name, health=100):
@@ -111,8 +111,8 @@ class Ability:
         Hint: The constructor initializes the maximum attack value.
         """
 
-        lowest_attack = self.attack_strength // 2
-        attack_strength = random.randint(lowest_attack, self.attack_strength)
+        lowest_attack = int(self.attack_strength)// 2
+        attack_strength = random.randint(lowest_attack, int(self.attack_strength))
         return attack_strength
 
 
@@ -139,6 +139,7 @@ class Team:
         self.name = team_name
         self.heroes = list()
 
+
     def add_hero(self, Hero):
         """Add Hero object to heroes list."""
         self.heroes.append(Hero)
@@ -155,6 +156,16 @@ class Team:
                 else:
                     return 0
         return 0
+
+    def has_hero(self):
+        hero_list = list()
+        for h in range(0,len(self.heroes)):
+            if self.heroes[h] > 0:
+                hero_list.append(True)
+            else: hero_list.append(False)
+        if all(hero_list) == True:
+            return True
+        else: return False
 
     def find_hero(self, name):
         """
@@ -221,7 +232,6 @@ class Team:
         """
         total_damage_amount = damage // len(self.heroes)
         total_of_deaths = 0
-
         for hero in self.heroes:
             dead_hero = hero.take_damage(total_damage_amount)
 
@@ -256,12 +266,16 @@ class Arena:
         """
         Declare variables
         """
-        self.team_one = team_1
-        self.team_two = team_2
+        self.team_one = None
+        self.team_two = None
+
 
     def usr_input(self, prompt):
         user_input = input(prompt)
-        return user_input
+        if user_input == "exit":
+            sys.exit()
+        else:
+            return user_input
 
     def build_team_one(self):
         """
@@ -271,48 +285,51 @@ class Arena:
         #name of heroes
         #name of ability
         print("Lets create your team!")
-        self.team_one = Team(self.usr_input("Give your team a name! "))
-        hero_name = self.hero_name
-        ability_name = self.usr_input("What ability does {} have? ".format(hero_name))
-        ability_lvl = int(self.usr_input("What's the ability? "))
-        ability = Ability(ability_name, ability_lvl)
-        hero_name.add_ability(ability)
-        weapon = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
-        hero_name.add_ability(weapon)
-        self.team_one.add_hero(hero_name)
 
-        hero_name2 = self.hero_name
-        ability_name2 = self.usr_input("What ability does {} have? ".format(hero_name2))
-        ability_lvl2 = int(self.usr_input("What's the ability? "))
-        ability2 = Ability(ability_name, ability_lvl)
-        hero_name2.add_ability(ability2)
-        weapon2 = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
-        hero_name2.add_ability(weapon2)
-        self.team_one.add_hero(hero_name2)
+        self.team_one = Team(self.usr_input("Give your team a name! "))
+        hero1 = Hero(self.usr_input("Name your SUPER HERO! "))
+        # hero2 = Hero(self.usr_input("Name your second SUPER HERO! "))
+        ability_name1 = self.usr_input("What ability does {} have? ".format(hero1.name))
+        # ability_name2 = self.usr_input("What ability does {} have? ".format(hero2.name))
+        ability_lvl1 = self.usr_input("What's {} ability level? ".format(hero1.name))
+        # ability_lvl2 = self.usr_input("What's {} ability level? ".format(hero2.name))
+        ability1 = Ability(ability_name1, ability_lvl1)
+        # ability2 = Ability(ability_name2, ability_lvl2)
+        hero1.add_ability(ability1)
+        # hero2.add_ability(int(ability2))
+        weapon1 = Weapon(self.usr_input("What weapon {} using? ".format(hero1.name)), random.randint(1, 5) * 10)
+        # weapon2 = Weapon(self.usr_input("What weapon {} using? ".format(hero2.name)), random.randint(1, 5) * 10)
+        hero1.add_ability(weapon1)
+        # hero2.add_ability(weapon2)
+        self.team_one.add_hero(hero1)
+        # self.team_one.add_hero(hero2)
+
+
 
     def build_team_two(self):
         """
         This method should allow user to build team two.
         """
-        print("Create your secon team!\n")
-        hero_name = self.hero_name
-        self.team_two = Team(self.usr_input("Give your team a name! "))
-        ability_name = self.usr_input("What ability does {} have? ".format(hero_name))
-        ability_lvl = int(self.usr_input("What's the ability power? "))
-        ability = Ability(ability_name, ability_lvl)
-        hero_name.add_ability(ability)
-        weapon = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
-        hero_name.add_ability(weapon)
-        self.team_two.add_hero(hero_name)
+        print("\nCreate your secon team!")
 
-        hero_name2 = self.hero_name
-        ability_name2 = self.usr_input("What ability does {} have? ".format(hero_name2))
-        ability_lvl2 = int(self.usr_input("What's the ability? "))
-        ability2 = Ability(ability_name, ability_lvl)
-        hero_name2.add_ability(ability2)
-        weapon2 = Weapon(self.usr_input("What weapon are you using? "), random.randint(1, 5) * 10)
-        hero_name2.add_ability(weapon2)
-        self.team_one.add_hero(hero_name2)
+
+        self.team_two = Team(self.usr_input("Give your team a name! "))
+        hero1 = Hero(self.usr_input("Name your SUPER HERO! "))
+        # hero2 = Hero(self.usr_input("Name your second SUPER HERO! "))
+        ability_name1 = self.usr_input("What ability does {} have? ".format(hero1.name))
+        # ability_name2 = self.usr_input("What ability does {} have? ".format(hero2.name))
+        ability_lvl1 = self.usr_input("What's {} ability level? ".format(hero1.name))
+        # ability_lvl2 = self.usr_input("What's {}ability level? ".format(hero2.name))
+        ability1 = Ability(ability_name1, ability_lvl1)
+        # ability2 = Ability(ability_name2, ability_lvl2)
+        hero1.add_ability(ability1)
+        # hero2.add_ability(ability2)
+        weapon1 = Weapon(self.usr_input("What weapon {} using? ".format(hero1.name)), random.randint(1, 5) * 10)
+        # weapon2 = Weapon(self.usr_input("What weapon {} using? ".format(hero2.name)), random.randint(1, 5) * 10)
+        hero1.add_ability(weapon1)
+        # hero2.add_ability(weapon2)
+        self.team_two.add_hero(hero1)
+        # self.team_two.add_hero(hero2)
 
 
 
@@ -321,21 +338,19 @@ class Arena:
         This method should continue to battle teams until
         one or both teams are dead.
         """
-        deaths1 = 0
-        deaths2 = 0
-
-        while deaths < len(self.team_one.heroes) and deaths2 < len(self.team2.heroes):
-            self.team_one.attack(self.team_two)
-            self.team_two.attack(self.team_one)
-
-            for i in self.team_one.heroes:
-                deaths1 += i.deaths
-
-            for i in self.team_two.heoes:
-                deaths2 += i.deaths
+        # deaths1 = 0
+        # deaths2 = 0
+        #
+        # while deaths1 < len(self.team_one.heroes) and deaths2 < len(self.team_two.heroes):
+        #     self.team_one.attack(self.team_two)
+        #     self.team_two.attack(self.team_one)
+        #     if
+        #     print("hi")
+        while self.team_one.find_hero == True and self.team_two.find_hero == True:
+            print("team_battle")
 
 
-    def show_stats(arena):
+    def show_stats(self):
         """
         This method should print out the battle statistics
         including each heroes kill/death ratio.
@@ -343,28 +358,53 @@ class Arena:
         print(self.team_one.name + " stats: ")
         self.team_one.stats()
         print(self.team_two.name + " stats: ")
-        self.team_one.stats()
+        self.team_two.stats()
 
     def play_again(self):
         play_again = self.usr_input("Play Again? Y or N: ")
-        if play_again == "y" || play_again == "Y":
+        if play_again == "y" or play_again == "Y":
             self.team_one.revive_heroes()
             self.team_two.revive_heroes()
             game_loop(self)
 
 
+
 arena = Arena()
-arena.build_team_one()
-arena.build_team_two()
 
 
 
-def game_loop(arena):
-    arena.team_battle()
-    arena.team_battle()
-    arena.play_again()
-
-game_loop(arena)
+# def game_loop(arena):
+#     arena.build_team_one()
+#     arena.build_team_two()
+#     arena.team_battle()
+#     arena.team_battle()
+#     arena.show_stats()
+#     arena.play_again()
+#
+# game_loop(arena)
 
 
 if __name__ == "__main__":
+game_is_running = True
+
+    # Instantiate Game Arena
+    arena = Arena()
+
+    #Build Teams
+    arena.build_team_one()
+    arena.build_team_two()
+
+    while game_is_running:
+
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
+
+        #Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            #Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()
